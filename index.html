@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    //<link rel="icon" href="https://glitch.com/favicon.ico" />
+    <script src="https://aframe.io/releases/1.2.0/aframe.min.js"></script>
+    <title>Romería Zapopan 360</title>
+  </head>
+
+  <body>
+    <a-scene cursor="rayOrigin: mouse" raycaster="objects: .clickeable">
+      <!-- Imagen 360° inicial -->
+      <a-sky id="sky" src="https://cdn.glitch.global/b18cfedf-1a4d-4dca-a074-74e51418dd42/Png_1.png?v=1741759285333"></a-sky>
+
+      <!-- Botón interactivo -->
+      <a-plane id="boton" class="clickeable"
+               position="0 1.5 -3"
+               width="1" height="0.5"
+               color="blue"
+               event-set__enter="_event: mouseenter; material.color: orange"
+               event-set__leave="_event: mouseleave; material.color: blue">
+        <a-text value="Siguiente Imagen" align="center" position="0 0 0.1"></a-text>
+      </a-plane>
+    </a-scene>
+
+    <script>
+      let images = ["Virgen1.JPG", "", ""];
+      let index = 0;
+
+      function cambiarImagen() {
+        index = (index + 1) % images.length;
+        document.getElementById("sky").setAttribute("src", images[index]);
+      }
+
+      // Detectar clics en el botón
+      document.getElementById("boton").addEventListener("click", cambiarImagen);
+    </script>
+  </body>
+</html>
